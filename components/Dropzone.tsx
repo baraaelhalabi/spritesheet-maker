@@ -12,10 +12,15 @@ const Dropzone = ({className} : {className?: string }) => {
     const [isSending, setIsSending] = useState<boolean>(false);
     const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
         if(acceptedFiles?.length) {
-            setFiles((previousFiles: any) => [
+            setFiles((previousFiles: any) => {
+                if(previousFiles.length + acceptedFiles.length > 15) {
+                    toast.error('Maximum images alowed is 15');
+                    return previousFiles;
+                }
+                return [
                 ...previousFiles,
                 ...acceptedFiles.map((file: File) => Object.assign(file, {preview: URL.createObjectURL(file)}))
-            ]);
+            ]});
         }
         // console.log(rejectedFiles);
         rejectedFiles.forEach(rejectedFile => {
@@ -27,7 +32,7 @@ const Dropzone = ({className} : {className?: string }) => {
         accept: {
             'image/*': ['.png', '.jpg', '.jpeg', '.avif', '.webp']
         },
-        maxSize: 1024 * 1024 * 2,
+        maxSize: 1024 * 1024,
         maxFiles: 15,
     });
 

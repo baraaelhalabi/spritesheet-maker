@@ -20,6 +20,9 @@ const Navbar = () => {
                 <Image src={Logo} alt='logo' height={50} className='hidden md:block'/>
             </div>
             <div className="navbar-end">
+                <a href='https://ko-fi.com/C0C6ZM5Y6' target='_blank'>
+                <Image className='border-spacing-0 h-[36px] min-w-[130px] mr-4' height={36} width={130} src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+                </a>
                 <button className="btn btn-outline btn-primary" onClick={openFeedbackDialog}>Feedback</button>
             </div>
         </div>
